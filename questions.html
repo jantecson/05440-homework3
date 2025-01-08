@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Questionnaire</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        #question-form {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            max-width: 400px;
+            margin: 20px auto;
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        .option-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 10px;
+        }
+        .option-buttons input[type="button"] {
+            flex: 1;
+            margin: 1px;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            background-color: #007bff;
+            color: #fff;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+        .option-buttons input[type="button"]:hover {
+            background-color: #0056b3;
+        }
+        .option-buttons input[type="button"].selected {
+            background-color: #0056b3;
+        }
+        .option-buttons input[type="button"].disabled {
+            cursor: not-allowed;
+            opacity: 0.5;
+        }
+        .action-button {
+            display: inline-block;
+            background-color: #4CAF50; /* Green */
+            color: #fff;
+            padding: 10px 20px; /* Larger padding */
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            font-size: 18px; /* Larger font size */
+            transition: background-color 0.3s ease;
+            margin-top: 10px; /* Add margin to separate from other buttons */
+        }
+        .action-button:hover {
+            background-color: #45a049;
+        }
+        #generated-link-container {
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 10px;
+            margin-top: 10px; /* Add margin to separate from other elements */
+        }
+        #generated-link {
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 10px;
+        }
+        #copy-icon {
+            width: 20px;
+            height: 20px;
+            fill: #007bff; /* Blue color for the icon */
+            cursor: pointer;
+            transition: fill 0.3s ease;
+        }
+        #copy-icon:hover {
+            fill: #0056b3; /* Darker blue on hover */
+        }
+    </style>
+</head>
+<body>
+    <h1 style="text-align: center;">Customization</h1>
+    <form id="question-form">
+        <label for="num-lines">Select number of lines:</label>
+        <div class="option-buttons">
+            <input type="button" class="line-option" value="100">
+            <input type="button" class="line-option" value="200">
+            <input type="button" class="line-option" value="300">
+            <input type="button" class="line-option" value="400">
+            <input type="button" class="line-option" value="500">
+            <input type="button" class="line-option" value="600">
+        </div>
+        <label for="num-trials">Select number of trials:</label>
+        <div class="option-buttons">
+            <input type="button" class="trial-option" value="4">
+            <input type="button" class="trial-option" value="8">
+            <input type="button" class="trial-option" value="12">
+            <input type="button" class="trial-option" value="16">
+            <input type="button" class="trial-option" value="20">
+        </div>
+        <label for="intended-purpose">Select intended purpose:</label>
+        <div class="option-buttons">
+            <input type="button" class="purpose-option" value="CMU Study">
+            <input type="button" class="purpose-option" value="Other">
+        </div>
+        <input type="button" id="generate-link" class="action-button" value="Generate Link">
+        <input type="button" id="go-to-test" class="action-button" value="Proceed to Test" style="margin-left: 10px;">
+        <div id="generated-link-container">
+            <span id="generated-link"></span>
+            <svg id="copy-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" title="Copy to Clipboard">
+                <path d="M21 2H7c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-1 14H8c-.6 0-1-.4-1-1s.4-1 1-1h12c.6 0 1 .4 1 1s-.4 1-1 1zm0-4H8c-.6 0-1-.4-1-1s.4-1 1-1h12c.6 0 1 .4 1 1s-.4 1-1 1zm0-4H8c-.6 0-1-.4-1-1s.4-1 1-1h12c.6 0 1 .4 1 1s-.4 1-1 1z"/>
+            </svg>
+        </div>
+    </form>
+
+    <script>
+        // Function to update the availability of trial buttons based on the selected number of lines
+        function updateTrialButtons(numLines) {
+            var trialButtons = document.querySelectorAll('.trial-option');
+            trialButtons.forEach(button => {
+                if (numLines == 100) {
+                    // Disable all trial buttons except for 4, 8, and 12
+                    if (button.value != '4' && button.value != '8' && button.value != '12') {
+                        button.disabled = true;
+                        button.classList.add('disabled');
+                    } else {
+                        button.disabled = false;
+                        button.classList.remove('disabled');
+                    }
+                } else {
+                    // Enable all trial buttons
+                    button.disabled = false;
+                    button.classList.remove('disabled');
+                }
+            });
+        }
+
+        document.querySelectorAll('.line-option').forEach(option => {
+            option.addEventListener('click', function() {
+                // Mark all other line options as unchecked
+                document.querySelectorAll('.line-option').forEach(otherOption => {
+                    if (otherOption !== option) {
+                        otherOption.classList.remove('selected');
+                    }
+                });
+                option.classList.add('selected');
+
+                // Update the availability of trial buttons based on the selected number of lines
+                updateTrialButtons(option.value);
+            });
+        });
+    
+        document.querySelectorAll('.trial-option').forEach(option => {
+            option.addEventListener('click', function() {
+                // Mark all other trial options as unchecked
+                document.querySelectorAll('.trial-option').forEach(otherOption => {
+                    if (otherOption !== option) {
+                        otherOption.classList.remove('selected');
+                    }
+                });
+                option.classList.add('selected');
+            });
+        });
+
+        document.querySelectorAll('.purpose-option').forEach(option => {
+            option.addEventListener('click', function() {
+                // Mark all other purpose options as unchecked
+                document.querySelectorAll('.purpose-option').forEach(otherOption => {
+                    if (otherOption !== option) {
+                        otherOption.classList.remove('selected');
+                    }
+                });
+                option.classList.add('selected');
+            });
+        });
+    
+        document.getElementById('generate-link').addEventListener('click', function(event) {
+            event.preventDefault();
+    
+            var selectedLineOption = document.querySelector('.line-option.selected');
+            var selectedTrialOption = document.querySelector('.trial-option.selected');
+            var selectedPurposeOption = document.querySelector('.purpose-option.selected');
+    
+            if (selectedLineOption !== null && selectedTrialOption !== null && selectedPurposeOption !== null) {
+                var numLines = selectedLineOption.value;
+                var numTrials = selectedTrialOption.value;
+                var intendedPurpose = selectedPurposeOption.value.toLowerCase().replace(' ', '_');
+    
+                // Generate unique link with parameters
+                var baseURL = 'https://www.cs.cmu.edu/~bam/ixtbook/scrolling/participant.html'; // URL of the next page
+                var params = new URLSearchParams();
+                params.append('num-lines', numLines);
+                params.append('num-trials', numTrials);
+                params.append('study-select', intendedPurpose);
+                var uniqueLink = baseURL + '?' + params.toString();
+    
+                // Display the unique link
+                var uniqueLinkElement = document.getElementById('generated-link');
+                uniqueLinkElement.textContent = uniqueLink;
+    
+                // Copy unique link to clipboard
+                navigator.clipboard.writeText(uniqueLink).then(function() {
+                    console.log('Unique link copied to clipboard');
+                }, function(err) {
+                    console.error('Failed to copy unique link: ', err);
+                });
+            } else {
+                alert('Please select number of lines, number of trials, and intended purpose.');
+            }
+        });
+
+        document.getElementById('go-to-test').addEventListener('click', function(event) {
+            event.preventDefault();
+    
+            var selectedLineOption = document.querySelector('.line-option.selected');
+            var selectedTrialOption = document.querySelector('.trial-option.selected');
+            var selectedPurposeOption = document.querySelector('.purpose-option.selected');
+    
+            if (selectedLineOption !== null && selectedTrialOption !== null && selectedPurposeOption !== null) {
+                var numLines = selectedLineOption.value;
+                var numTrials = selectedTrialOption.value;
+                var intendedPurpose = selectedPurposeOption.value.toLowerCase().replace(' ', '_');
+    
+                // Generate unique link with parameters
+                var baseURL = 'participant.html'; // URL of the next page
+                var params = new URLSearchParams();
+                params.append('num-lines', numLines);
+                params.append('num-trials', numTrials);
+                params.append('study-select', intendedPurpose);
+                var uniqueLink = baseURL + '?' + params.toString();
+    
+                // Redirect to the next page with parameters
+                window.location.href = uniqueLink;
+            } else {
+                alert('Please select number of lines, number of trials, and intended purpose.');
+            }
+        });
+    </script>
+</body>
+</html>

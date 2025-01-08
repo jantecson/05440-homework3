@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to ScrollTest</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+        .home-page {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        h1 {
+            font-size: 32px;
+            color: #333;
+        }
+        p {
+            font-size: 16px;
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        h4 {
+            font-size: 20px;
+            color: #333;
+            margin-top: 30px;
+            margin-bottom: 10px;
+        }
+        #btn-container {
+            margin-top: 15px;
+        }
+        .btn-main {
+            padding: 10px 20px;
+            font-size: 18px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .btn-main:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="home-page">
+        <h1>Welcome to ScrollTest</h1>
+        <br/>
+        <p>
+            This is a standardized tool designed to mimic everyday scrolling behaviors on a variety of scrolling devices developed by undergraduate student 
+            Fatima Yousaf under the supervision of Prof. Brad Myers at Carnegie Mellon University.
+        </p>
+
+        <p>
+            ScrollTest is designed to be an open-source platform and for general use. You will have the option to customize your own 
+            test by selecting the number of lines you would like and the number of trials.
+        </p>
+            
+        <p>
+            <h4>Citation</h4>
+            The first design for ScrollTest was produced in Prof. Brad Myers' class as a final project by students Cem Ergin, Emily Porat,
+             Sijia Li and Chun Wang in 2019. Chaoran Chen, as a TA, developed a new version that was formally tested in 2022 and is the 
+             original developer of the platform.
+        </p>
+
+        <div id="btn-container">
+            <button class="btn-main primary" onclick="window.location.href='./questions.html';">Next</button>
+        </div>
+    </div>
+</body>
+</html>

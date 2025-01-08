@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Scrolling Test Page</title>
+        <script src="https://d3js.org/d3.v7.min.js"></script>
+        <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+        <!-- <script src="https://unpkg.com/vconsole@latest/dist/vconsole.min.js"></script> -->
+    </head>
+
+    <body style="max-height: 50vh; overflow-y: scroll;">
+
+    <body>
+        
+        <!-- navigation bar -->
+<div>
+    <nav id="nav" class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-10">
+                    <p class="navbar-text" id="p-1" style="color:white; display: block; font-size: 18px;">
+                        Scrolling test: <strong class="num">1</strong> | Scroll up to land the stars in the grey area.
+                    </p>
+                    <p class="navbar-text" id="p-2" style="color:white; display: none; font-size: 18px;">
+                        Scrolling test: <strong class="num">1</strong> | Scroll up to land <strong style="color:rgb(255, 180, 42);">LINE</strong> <strong id="line_num" style="color:rgb(255, 180, 42);">10</strong> in the grey area.
+                    </p>
+                </div>
+                <!-- <div class="col-xs-2">
+                    <button id="btn-start" class="btn btn-warning navbar-btn">start</button>
+                </div> -->
+            </div>
+        </div>
+    </nav>
+</div>
+
+
+        <div class="popup" id="pop-tutorial">
+            <h2>Tutorial</h2>
+            <p style="display:inline"> 
+                <span id="tutorial-text"></span>
+            </p>
+            <button type="button" id="btn-close">Next</button>
+        </div>
+
+        <div class="popup" id="pop-window">
+            <h2>Start Test</h2>
+            <p>Click start and scroll the target to the grey area as quickly as possible.</p>
+            <button type="button" id="btn-start">Start</button>
+        </div>
+
+        <div class="popup" id="pop-switch">
+            <h2>Attention</h2>
+            <p>Now you will be told what line to scroll to, and there won't be any stars on that line. The target line is displayed in the black banner at the top.</p>
+            <button type="button" id="btn-close-switch">Next</button>
+        </div>
+
+        <div class="popup" id="pop-end">
+            <h2>End Test</h2>
+            <p>Congratulations! You have finished this round of the study. 
+                If this was a demo run or if you have another round of the study to do, click Back. 
+                Otherwise click Questionnaire to provide your feedback about the scrolling techniques.</p>
+            <button type="button" id="btn-back">Back</button>
+            <button type="button" id="btn-questionnaire">Questionnaire</button>
+        </div>
+
+        <div class="grey_mask" id="grey_mask"></div>
+        <div id="grey_area" style="pointer-events: none; touch-action: none;"></div>
+
+        <!-- svg shapes -->
+        <div id="svg-container" style="overflow-y:auto;">
+            <svg id="svg" viewBox="0 0 1000 41050" preserveAspectRatio="none"></svg>
+        </div>
+
+        <script>
+            // Parse URL parameters
+            const urlParams = new URLSearchParams(window.location.search);
+            const numLines = urlParams.get('num-lines');
+            const numTrials = urlParams.get('num-trials');
+            console.log(numLines);
+
+            if (numLines == null) {
+                numLines = 400;
+            }
+
+            // Calculate height based on numLines
+            const viewBoxHeight = (parseInt(numLines) * 100) + 100;
+
+            // Update viewBox attribute
+            document.getElementById('svg').setAttribute('viewBox', `0 0 1000 ${viewBoxHeight}`);
+            console.log("Script executed");
+
+            $(document).ready(function() {
+                const autoswitch = urlParams.get('autoswitch');
+        
+                let tutorialText = "In this study, you will use one or more scrolling techniques to land either " +
+            "the row of stars or a specific line into the target grey area in the center " +
+            "of the webpage.<br><br>" +
+            "You must get the row of stars or the specific numbered line (shown in the " +
+            "black banner at the top of the page) into the grey area. You must then stop " +
+            "moving with the target fully in the grey area - it is not sufficient to just " +
+            "scroll by the grey area. The location of the stars row and the target line " +
+            "numbers will change, and the size of the grey area will also change.<br><br>" +
+            "In the demo test, you will have 2 chances to get familiar with this test. " +
+            "Then, you will have a formal test with " + (numTrials) + " trials.<br><br>" +
+            "Tip: If you find it hard to reach the grey area using your mouse in Windows, you can try to " +
+            "change the behavior of scrolling wheel. In Settings > Mouse, you can change how many lines " +
+            "to scroll from 3 to 1 to make the scrolling behavior more smooth.";
+
+        if (autoswitch === 'Click to switch') {
+            tutorialText = "In this study, you will use one or more scrolling techniques to land either " +
+                "the row of stars or a specific line into the target grey area in the center " +
+                "of the webpage.<br><br>" +
+                "You must get the row of stars or the specific numbered line (shown in the " +
+                "black banner at the top of the page) into the grey area. You must then stop " +
+                "moving with the target fully in the grey area - it is not sufficient to just " +
+                "scroll by the grey area, and then you must CLICK anywhere in the white area containing the shapes. " +
+                "The location of the stars row and the target line " +
+                "numbers will change, and the size of the grey area will also change.<br><br>" +
+                "In the demo test, you will have 2 chances to get familiar with this test. " +
+                "Then, you will have a formal test with " + (numTrials) + " trials.<br><br>" +
+                "Tip: If you find it hard to reach the grey area using your mouse in Windows, you can try to " +
+                "change the behavior of scrolling wheel. In Settings > Mouse, you can change how many lines " +
+                "to scroll from 3 to 1 to make the scrolling behavior more smooth.";
+        }
+        
+                // Update the tutorial text content
+                $("#tutorial-text").html(tutorialText);
+            });
+        </script>
+
+
+        
+        <script src="./main.js"></script>
+        <link rel="stylesheet" href="./scrolling-test-styles.css">
+    </body>
+    
+
+</html>
+
