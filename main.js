@@ -822,7 +822,7 @@ function sendData2GoogleSheet(data){
     console.log(data4json);
     //save to google sheet
     //change the url
-    const scriptURL = "https://script.google.com/macros/s/AKfycbxBt26TnhX1_OMbjA6XYqRF7XCRc7liLlElZqnIwlWivOCXu5aFD2J4T5fijpY7CrttiQ/exec?action=addData"
+    const scriptURL = "https://script.google.com/macros/s/AKfycbxRT91Z34fQzhliVCW5PnvMCnFhauJtLFjB8BsMnY_CNjB77qBLlFE13l08YmRQv62Y/exec"
     fetch(scriptURL, { 
         method: 'POST', 
         headers: {
