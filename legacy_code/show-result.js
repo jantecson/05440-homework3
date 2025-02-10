@@ -91,7 +91,7 @@ for (var j=0; j<data4json.length; j++){
 }
 
 //save to google sheet
-const scriptURL = "https://script.google.com/macros/s/AKfycbwpiu5nYnPSITFyxcDpIAJc6RuOjp61Sc2RYPhtw3wmgt0mDPfzicZSqYEDWfZFFR8StQ/exec?action=addData"
+const scriptURL = "https://script.google.com/a/macros/andrew.cmu.edu/s/AKfycbzp7QrjXcxVVNrjTmFE62yC5ZmTBC8IMtfEY4ZE8QJqBuISTno2muT7uD0A4-2jmUxrOA/exec?action=addData"
 fetch(scriptURL, { method: 'POST', body: JSON.stringify(data4json)})
 
 //download JSON file
