@@ -648,7 +648,7 @@ function isTargetInGreyArea() {
                         closePop(popend);
                         location.href='./questions.html';
                     })
-		    // results button
+		    
                     $("#btn-results").click(function(){
                         sendData2GoogleSheet(data);
                         closePop(popend);
