@@ -825,7 +825,7 @@ function sendData2GoogleSheet(data){
         maxBacktrack = finaldata["maxbacktrack"][i];
         ratio = finaldata["ratio"][i];
         datetime = finaldata["datetime"][i]
-        data4json.push({ "ParticipantID":info_data["id"], "Scrolling_Technique":info_data["tech"], "Level_of_Experience":info_data["exp"].split("=")[0], 
+        data4json.push({ "User":info_data["username"], "ParticipantID":info_data["id"], "Scrolling_Technique":info_data["tech"], "Level_of_Experience":info_data["exp"].split("=")[0], 
                         "Mode":info_data["mode"], "Autoswitch":info_data["autoswitch"], "IP":info_data["ip"], "Detail":info_data["detail"],
                         "Round":round, "Time_(ms)":time, "Target_Line": target, "Num_Switchbacks": traceback,
                         "Cumulative_Distance_(px)":cumDis, "Max_Back_Track_Distance_(px)":maxBacktrack, "Ratio":ratio, "Date": datetime});
