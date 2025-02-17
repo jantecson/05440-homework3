@@ -57,6 +57,7 @@ function enableBtn(array){
 }
 
 function getValue(mode){
+    var username = $("#name").val();
     var id = $("#participantId").val();
     var tech = $("#tech").val();
     var experience = $("#experience").val();
@@ -64,11 +65,11 @@ function getValue(mode){
     
     
     if ($("#enter-detail").css("display") == "none"){
-        d = {"id":id, "tech":tech, "exp":experience, "autoswitch": autoswitch, "detail":"", "num-lines": numLines,
+        d = {"name":name, "id":id, "tech":tech, "exp":experience, "autoswitch": autoswitch, "detail":"", "num-lines": numLines,
         "num-trials": numTrials, "tech": tech, "id": id}
     }
     else{
-        d = {"id":id, "tech":tech, "exp":experience, "autoswitch": autoswitch, "detail":$('#detail').val(), "num-lines": numLines,
+        d = {"name":name, "id":id, "tech":tech, "exp":experience, "autoswitch": autoswitch, "detail":$('#detail').val(), "num-lines": numLines,
         "num-trials": numTrials, "tech": tech, "id": id}
     }
     var value;
