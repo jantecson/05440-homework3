@@ -648,6 +648,12 @@ function isTargetInGreyArea() {
                         closePop(popend);
                         location.href='./questions.html';
                     })
+		    // results button
+                    $("#btn-results").click(function(){
+                        sendData2GoogleSheet(data);
+                        closePop(popend);
+                        location.href='./results.html';
+                    })
                 }
                 else {
                     openPop(popend);
@@ -661,6 +667,11 @@ function isTargetInGreyArea() {
                         sendData2GoogleSheet(data);
                         closePop(popend);
                         location.href='./questions.html';
+                    })
+                    $("#btn-results").click(function(){
+                        sendData2GoogleSheet(data);
+                        closePop(popend);
+                        location.href='./results.html';
                     })
                 }
             }
