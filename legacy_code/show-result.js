@@ -1,5 +1,5 @@
 var info_data = JSON.parse(sessionStorage.getItem("info"));
-$("#name_val").text(info_data["username"]);
+$("#name_val").text(info_data["name"]);
 $("#id_val").text(info_data["id"]);
 $("#type_val").text(info_data["type"]);
 $("#tech_val").text(info_data["tech"]);
@@ -69,7 +69,7 @@ for (var i=0; i<data["round"].length;i++){
         total_cum_dis_2 = total_cum_dis_2 + cumDis;
     }
 
-    data4json.push({ "User":info_data["username"], "AndrewID":info_data["id"], "Participant_Type":info_data["type"],
+    data4json.push({ "User":info_data["name"], "AndrewID":info_data["id"], "Participant_Type":info_data["type"],
                     "Scrolling_Technique":info_data["tech"], "Detail":info_data["detail"], "Level_of_Experience":info_data["exp"].split("=")[0], "Mode":info_data["mode"],
                     "Round":round, "Time_(ms)":time, "Target_Line": target, "Num_Switchbacks": traceback,
                     "Cumulative_Distance_(px)":cumDis, "Max_Back_Track_Distance_(px)":maxBacktrack});
