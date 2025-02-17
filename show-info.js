@@ -13,19 +13,32 @@ $(document).ready(function(){
 });
 
 var info_data = JSON.parse(sessionStorage.getItem("info"))
+
 if (info_data != null){
-    $("#participantId").val(info_data["id"])
+    $("#name").val(info_data["name"]);
     inputArray[0] = true;
     enableBtn(inputArray);
 }
 
-
-$("#participantId").on("input", function () {
+$("#name").on("input", function () {
     inputArray[0] = true;
     enableBtn(inputArray);
 });
-$("#tech").on("change", function () {
+
+if (info_data != null){
+    $("#participantId").val(info_data["id"]);
     inputArray[1] = true;
+    enableBtn(inputArray);
+}
+
+$("#participantId").on("input", function () {
+    inputArray[1] = true;
+    enableBtn(inputArray);
+});
+
+
+$("#tech").on("change", function () {
+    inputArray[2] = true;
     enableBtn(inputArray);
     console.log("add new text box");
     $("#enter-detail").css("display", "block");
@@ -38,14 +51,14 @@ $("#tech").on("change", function () {
     // }
 });
 $("#experience").on("change", function () {
-    inputArray[2] = true;
+    inputArray[3] = true;
     enableBtn(inputArray);
 });
 
 
 function enableBtn(array){
     enable = true;
-    for (var i = 0; i<3; i++){
+    for (var i = 0; i<4; i++){
         if (array[i] == false){
             enable = false;
         }
