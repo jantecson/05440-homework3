@@ -22,15 +22,15 @@
 // set the array for diff lengths
 
 var url_Params = new URLSearchParams(window.location.search);
-// var numLinesURL = url_Params.get('num-lines');
-// var numTrialsURL = url_Params.get('num-trials');
-// var purposeURL = url_Params.get('study_select');
+var numLinesURL = url_Params.get('num-lines');
+var numTrialsURL = url_Params.get('num-trials');
+var purposeURL = url_Params.get('study_select');
 var deviceURL = url_Params.get('tech');
 var partIdURL = url_Params.get('participant');
 
-var numLinesURL = 200;
-var numTrialsURL = 20;
-var purposeURL = "cmu_study";
+// var numLinesURL = 200;
+// var numTrialsURL = 20;
+// var purposeURL = "cmu_study";
 
 if (numLinesURL == null) {
     numLinesURL = 200;
