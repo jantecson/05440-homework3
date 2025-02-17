@@ -75,6 +75,10 @@
                 <tr>
                     <th>
                         <button class="copy-button" onclick="copyColumnToClipboard(0)">Copy</button>
+                        Name
+                    </th> 
+                    <th>
+                        <button class="copy-button" onclick="copyColumnToClipboard(0)">Copy</button>
                         Participant ID
                     </th>
                     <th>
@@ -153,6 +157,7 @@
 
             // Add column headers
             var headers = [
+                "Name",
                 "Participant ID",
                 "Round",
                 "Known/Unknown",
@@ -199,12 +204,14 @@
             var numRows = num_trials * 2; // Number of rows needed based on num_trials
             var deviceURL = urlParams.get('tech');
             var partURL = urlParams.get('participant');
+            var nameURL = urlParams.get('name');
             var allData = [];
 
             // Collect row data into a single array
             for (var i = 0; i < numRows; i++) {
                 var roundNumber = i+1
                 allData.push({
+                    name: nameURL,
                     participantID: partURL,
                     round: roundNumber,
                     knownUnknown: i < num_trials ? "Unknown" : "Known",
@@ -234,6 +241,7 @@
             data.forEach(function(rowData) {
                 var row = document.createElement("tr");
                 row.innerHTML = `
+                    <td>${rowData.name}</td>
                     <td>${rowData.participantID}</td>
                     <td>${rowData.round}</td>
                     <td>${rowData.knownUnknown}</td>
