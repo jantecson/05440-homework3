@@ -287,7 +287,8 @@ var ratio = NaN;
 
 // get target area height
 var info_data = JSON.parse(sessionStorage.getItem("info"));
-if (info_data["height"] != ""){
+
+if (info_data["height"] && !isNaN(parseInt(info_data["height"]))) {
     grey_area_height_ratio = parseInt(info_data["height"]);
 }
 
