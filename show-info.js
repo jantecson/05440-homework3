@@ -1,4 +1,4 @@
-var inputArray = [false, false, false];
+var inputArray = [false, false, false, false];
 
 const urlParams = new URLSearchParams(window.location.search);
 const numLines = urlParams.get('num-lines');
