@@ -652,7 +652,7 @@ function isTargetInGreyArea() {
                     $("#btn-results").click(function(){
                         sendData2GoogleSheet(data);
                         closePop(popend);
-                        location.href='./result.html';
+                        location.href='./legacy_code/result.html';
                     })
                 }
                 else {
@@ -671,7 +671,7 @@ function isTargetInGreyArea() {
                     $("#btn-results").click(function(){
                         sendData2GoogleSheet(data);
                         closePop(popend);
-                        location.href='./result.html';
+                        location.href='./legacy_code/result.html';
                     })
                 }
             }
