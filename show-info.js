@@ -70,7 +70,7 @@ function enableBtn(array){
 }
 
 function getValue(mode){
-    var username = $("#name").val();
+    var name = $("#name").val();
     var id = $("#participantId").val();
     var tech = $("#tech").val();
     var experience = $("#experience").val();
