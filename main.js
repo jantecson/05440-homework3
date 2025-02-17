@@ -31,6 +31,10 @@ console.log(purposeURL);
 
 console.log(numTrialsURL);
 
+numLinesURL = 200;
+numTrialsURL = 20;
+purposeURL = "cmu_study";
+
 if (numLinesURL == null) {
     numLinesURL = 200;
 }
