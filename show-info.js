@@ -6,8 +6,8 @@ const numTrials = urlParams.get('num-trials');
 const studySelect = urlParams.get('study-select');
 
 $(document).ready(function(){
-    if ($("#participantId").val() != "" && $("#tech").val() != "" && $("#experience").val() != ""){
-        inputArray = [true, true, true];
+    if ($("#name").val() != "" && $("#participantId").val() != "" && $("#tech").val() != "" && $("#experience").val() != ""){
+        inputArray = [true, true, true, true];
         enableBtn(inputArray);
     };
 });
