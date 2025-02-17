@@ -27,7 +27,8 @@ $("#participantId").on("input", function () {
 $("#tech").on("change", function () {
     inputArray[1] = true;
     enableBtn(inputArray);
-    $("#enter-detail").css("display", "none");
+    console.log("add new text box");
+    $("#enter-detail").css("display", "block");
     // if ($("#tech").val() == ''){
     //     console.log("add new text box");
     //     $("#enter-detail").css("display", "block");
