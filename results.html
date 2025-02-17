@@ -78,47 +78,51 @@
                         Name
                     </th> 
                     <th>
-                        <button class="copy-button" onclick="copyColumnToClipboard(0)">Copy</button>
-                        Participant ID
-                    </th>
-                    <th>
                         <button class="copy-button" onclick="copyColumnToClipboard(1)">Copy</button>
-                        Round
+                        Andrew ID
                     </th>
                     <th>
                         <button class="copy-button" onclick="copyColumnToClipboard(2)">Copy</button>
-                        Known/Unknown
+                        Participant Type
                     </th>
                     <th>
                         <button class="copy-button" onclick="copyColumnToClipboard(3)">Copy</button>
-                        Cumulative Distance
+                        Round
                     </th>
                     <th>
                         <button class="copy-button" onclick="copyColumnToClipboard(4)">Copy</button>
-                        Time
+                        Known/Unknown
                     </th>
                     <th>
                         <button class="copy-button" onclick="copyColumnToClipboard(5)">Copy</button>
-                        Device
+                        Cumulative Distance
                     </th>
                     <th>
                         <button class="copy-button" onclick="copyColumnToClipboard(6)">Copy</button>
-                        Target Line
+                        Time
                     </th>
                     <th>
                         <button class="copy-button" onclick="copyColumnToClipboard(7)">Copy</button>
-                        Traceback
+                        Device
                     </th>
                     <th>
                         <button class="copy-button" onclick="copyColumnToClipboard(8)">Copy</button>
-                        Max Backtrack
+                        Target Line
                     </th>
                     <th>
                         <button class="copy-button" onclick="copyColumnToClipboard(9)">Copy</button>
-                        Ratio
+                        Traceback
                     </th>
                     <th>
                         <button class="copy-button" onclick="copyColumnToClipboard(10)">Copy</button>
+                        Max Backtrack
+                    </th>
+                    <th>
+                        <button class="copy-button" onclick="copyColumnToClipboard(11)">Copy</button>
+                        Ratio
+                    </th>
+                    <th>
+                        <button class="copy-button" onclick="copyColumnToClipboard(12)">Copy</button>
                         Date and Time
                     </th>
                 </tr>
@@ -158,7 +162,8 @@
             // Add column headers
             var headers = [
                 "Name",
-                "Participant ID",
+                "Andrew ID",
+                "Participant Type",
                 "Round",
                 "Known/Unknown",
                 "Cumulative Distance",
@@ -205,6 +210,7 @@
             var deviceURL = urlParams.get('tech');
             var partURL = urlParams.get('participant');
             var nameURL = urlParams.get('name');
+            var typeURL = urlParams.get('type');
             var allData = [];
 
             // Collect row data into a single array
@@ -213,6 +219,7 @@
                 allData.push({
                     name: nameURL,
                     participantID: partURL,
+                    type: typeURL;
                     round: roundNumber,
                     knownUnknown: i < num_trials ? "Unknown" : "Known",
                     cumDistance: data.cumDistance[i],
@@ -243,6 +250,7 @@
                 row.innerHTML = `
                     <td>${rowData.name}</td>
                     <td>${rowData.participantID}</td>
+                    <td>${rowData.type}</td>
                     <td>${rowData.round}</td>
                     <td>${rowData.knownUnknown}</td>
                     <td>${rowData.cumDistance}</td>
